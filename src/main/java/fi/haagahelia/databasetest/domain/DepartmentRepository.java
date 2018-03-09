@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface DepartmentRepository extends CrudRepository<Department, Long>
-{
+public interface DepartmentRepository extends CrudRepository<Department, Long> {
 	
-	  List<Department>findByName(String Department);  
+	  List<Department>findByName(String name);  //Department
+	  
 	//Enabling ignoring case 
-	  List<Student>findByLastNameIgnoreCase(String Department);
+	  List<Student>findByLastNameIgnoreCase(String name); //Department
 		
 
 }

@@ -1,31 +1,47 @@
 package fi.haagahelia.databasetest;
 
+
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import fi.haagahelia.databasetest.domain.Department;
+import fi.haagahelia.databasetest.domain.DepartmentRepository;
 import fi.haagahelia.databasetest.domain.Student;
 import fi.haagahelia.databasetest.domain.StudentRepository;
 
 @SpringBootApplication
 public class DatabasetestApplication {
+	private static final Logger log= LoggerFactory.getLogger(DatabasetestApplication.class);
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(DatabasetestApplication.class, args);
 	}
 
-	
-	
+
 	@Bean 
-	public CommandLineRunner demo(StudentRepository repository){
+	public CommandLineRunner demo(StudentRepository srepository,DepartmentRepository drepository){
 		return(args) -> {
+									//local variable 
+			log.info("save students");
+			drepository.save(new Department("IT"));
+			drepository.save(new Department("Business"));
+			drepository.save(new Department("law"));
 
-			Student s1 = new Student(0, "juha", "hinkula", "juha.hinkula@email.com",null); 
-			Student s2 = new Student(1, "Mike", "Mars", "mars@mars.com", null);	       
+			srepository.save(new Student( "juha", "hinkula", "juha.hinkula@email.com",drepository.findByName("IT").get(0))); 
+			srepository.save(new Student( "Mike", "Mars", "mars@mars.com",drepository.findByName("IT").get(0)));	       
 
-			repository.save(s1);
-			repository.save(s2);
+			log.info("return all students");
+			for (Student student : srepository.findAll()) {
+				log.info(student.toString());
+			}
+		
 		};
 	}
 }
