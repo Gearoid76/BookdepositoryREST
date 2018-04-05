@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+	<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Book List </title>
+  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+</head>
+	<body> 
+		<h1>Books for you <h3 th:inline="text"> [[${#httpServletRequest.remoteUser}]]</h3></h1>
+		<table>
+		<tr> 
+			<th>Title book</th>
+			<th>Author</th>
+			<th>Year</th>
+			<th>Price</th>
+			<th>ISDN</th>
+			
+			
+		</tr>
+	<tbody>
+			<tr th:each="book: ${books}">   
+			<td th:text="{book.title}"></td> 
+			<td th:text="{book.author}"></td>  
+			<td th:text="{book.year}"></td>
+			<td th:text="{book.price}"></td>
+			<td th:text="{book.isdn}"></td>  
+			
+			
+			<td th:text="{book.category.name}"></td>
+		<td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td> 
+			</tr>
+	</tbody>
+	</table>
+  	<a href="/add" class="btnbtn-primary">Add Book</a> 
+  	<a href="/add">Add Book</a> 
+	</body>  
+
+</html>
