@@ -1,39 +1,73 @@
 package fi.haagahelia.bookdepository.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import fi.haagahelia.bookdepository.domain.Book;
 import fi.haagahelia.bookdepository.domain.BookRepository;
 import fi.haagahelia.bookdepository.domain.CategoryRepository;
+
+
 
 @Controller
 public class BookController {
 	@Autowired
-	private BookRepository repository;
+	private BookRepository brepository; // throwing an error changing from brepository to repos..
 	
 	@Autowired
 	private CategoryRepository crepository;
 	
+	  @RequestMapping(value="/login")
+			public String login() {
+				return "login";
+	}
+	
 	@RequestMapping ("/booklist")
 	public String book(Model model) {
-		model.addAttribute("books",repository.findAll());
+		model.addAttribute("books",brepository.findAll());
 		return "booklist";
 		}
-	// adding below the line 
-	 @RequestMapping(value={"/", "/home"})
-		public String homeSecure() {
-			return "home";
-		}  
+	// RESTful service to get all services for books 
+    @RequestMapping(value="/books")
+    public @ResponseBody List<Book> studentListRest() {	
+        return (List<Book>) brepository.findAll(); // found repository or brepository 
+    }    
+
+	// RESTful service to get book by id
+    @RequestMapping(value="/book/{id}", method = RequestMethod.GET)
+    public @ResponseBody Book findBookRest(@PathVariable("id") Long bookId) {	
+    	return brepository.findOne(bookId);
+    	} 
+    // Add new Book
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @RequestMapping(value = "/add")
+    public String addStudent(Model model){
+    	model.addAttribute("book", new Book());
+    	model.addAttribute("category", crepository.findAll());
+        return "addbook";
+    }
+    
+	
+	// Saving new book 
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String save(Book book) {
+		brepository.save(book);
+		return "redirect:booklist";
+		} 
+	     
 	    
-	    @RequestMapping(value="/hello")
-		public String helloSecure() {
-			return "hello";
-		}
-	    
-	    @RequestMapping(value="/login")
-		public String login() {
-			return "login";
-}
+ // Delete book 
+	    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	    public String deleteBook(@PathVariable("id") Long bookId, Model model) {
+	    	brepository.delete(bookId);
+	        return "redirect:../booklist";
+	    }	  
 }

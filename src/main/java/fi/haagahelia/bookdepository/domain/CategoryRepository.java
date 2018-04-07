@@ -8,7 +8,13 @@ import org.springframework.data.repository.query.Param;
 public interface CategoryRepository extends CrudRepository <Category, Long> {
 	
 	
-	List<Category>findByName(String title);  //Category
+	
+	
+//	List<Category> findByName (String name);
+
+	
+	
+	List<Category>findByName(String name);  //Category
 	
 	//Enabling Category case 
 	  List<Category>findByNameIgnoreCase(@Param("name")String title); 
@@ -17,10 +23,10 @@ public interface CategoryRepository extends CrudRepository <Category, Long> {
 		
 		
 		//RESTEnabling ignoring case 
-		//List<Book>findByAuthorIgnoreCase(@Param("author")String author);
+	//	List<Book>findByAuthorIgnoreCase(@Param("author")String author);
 		
 		//RESTEnabling ORDER BY for a query
-		//List<Book> findByAuthorOrderByTitleAsc(@Param("author")String author);
+	//	List<Book> findByAuthorOrderByTitleAsc(@Param("author")String author);
 	}		
 
 

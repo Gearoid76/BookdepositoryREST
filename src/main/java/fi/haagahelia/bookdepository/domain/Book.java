@@ -94,7 +94,7 @@ public class Book {
 	public String toString() {
 		if (this.category != null)
 		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isdn=" + isdn
-				+ ", price=" + price + ", category=" + category + "]";
+				+ ", price=" + price + ", category=" + this.getCategory() + "]";
 		else 
 			return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isdn=" + isdn
 					+ ", price=" + price + "]";

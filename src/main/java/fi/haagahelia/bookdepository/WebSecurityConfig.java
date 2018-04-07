@@ -1,4 +1,4 @@
-package fi.haagahelia.bookdepository.course;
+package fi.haagahelia.bookdepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -20,15 +20,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override 
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.authorizeRequests()
-			.antMatchers("/","/signup").permitAll()
-			
-			.antMatchers("/admin/**").hasRole("ADMIN")
-			.anyRequest().authenticated()
+		http		
+	//		.authorizeRequests().antMatchers("/css/**").permitAll() //  don't think i need these two 
+	//		.and()
+			.authorizeRequests().antMatchers("/signup", "/saveuser").permitAll()
+			.and()
+			.authorizeRequests().anyRequest().authenticated()
 			.and()
 		.formLogin()
 			.loginPage("/login")
+			.defaultSuccessUrl("/booklist")
 			.permitAll()
 			.and()
 			
@@ -36,9 +37,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.permitAll();
 	}
 	
+	
+	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+		auth.userDetailsService(userDetailsService()).passwordEncoder(new BCryptPasswordEncoder());
 			
 		
 	}

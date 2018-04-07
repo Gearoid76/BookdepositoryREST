@@ -5,20 +5,20 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class SignupForm {
-	@NotEmpty
-	@Size(min=5, max=30)
-	private String username="";
-	
-	@NotEmpty
+    @NotEmpty
+    @Size(min=5, max=30)
+    private String username = "";
+
+    @NotEmpty
     @Size(min=7, max=30)
     private String password = "";
-	
-	@NotEmpty
-	@Size(min=7, max=30)
-	private String passwordCheck ="";
-	
-	@NotEmpty
-	private String role ="USER";
+
+    @NotEmpty
+    @Size(min=7, max=30)
+    private String passwordCheck = "";
+
+    @NotEmpty
+    private String role = "USER";
 
 	public String getUsername() {
 		return username;
@@ -51,13 +51,10 @@ public class SignupForm {
 	public void setRole(String role) {
 		this.role = role;
 	}
+    
+    
+}
 
-	
-	
-	}
-	
-	
-	
 	
 
 

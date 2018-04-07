@@ -9,6 +9,10 @@ import org.springframework.data.rest.core.annotation.RestResource;
 @RestResource
 public interface BookRepository extends CrudRepository <Book,Long> {
 	
+	
+//	List<Book> findByName(String title);
+	
+	
 	//REST side of the previous two shown below 
 		List<Book>findByAuthor(@Param("author") String author);
 		
@@ -21,7 +25,7 @@ public interface BookRepository extends CrudRepository <Book,Long> {
 			
 		
 		//RESTEnabling ignoring case 
-		List<Book>findByTitleIgnoreCase(@Param("title") String title);
+			List<Book>findByTitleIgnoreCase(@Param("title") String title);
 		
 		}
 		
