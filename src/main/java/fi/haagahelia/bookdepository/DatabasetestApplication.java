@@ -55,8 +55,8 @@ public class DatabasetestApplication {
 		};
 	}
 }
-				// right clicked to add the 0,1 (originally 0) and added department = null
-				//adding "department" would just ask to verify another String.
+				// right clicked to add the 0,1 (originally 0) and added category = null
+				//adding "category" would just ask to verify another String.
 
 		
 

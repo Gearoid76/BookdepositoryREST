@@ -37,7 +37,7 @@ public class BookController {
 		}
 	// RESTful service to get all services for books 
     @RequestMapping(value="/books")
-    public @ResponseBody List<Book> studentListRest() {	
+    public @ResponseBody List<Book> bookListRest() {	
         return (List<Book>) brepository.findAll(); // found repository or brepository 
     }    
 
@@ -49,7 +49,7 @@ public class BookController {
     // Add new Book
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/add")
-    public String addStudent(Model model){
+    public String addBook(Model model){
     	model.addAttribute("book", new Book());
     	model.addAttribute("category", crepository.findAll());
         return "addbook";
