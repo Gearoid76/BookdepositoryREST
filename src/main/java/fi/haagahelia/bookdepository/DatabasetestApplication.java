@@ -44,15 +44,8 @@ public class DatabasetestApplication {
 			brepository.save(new Book("The great Gatsby", "F.Scott Fitzgerald","1925","45654", "4.78", crepository.findByName("Horror").get(0)));
 			brepository.save(new Book("1984", "George Orwell","1949","459454", "12.78", crepository.findByName("Horror").get(0)));
 
-			// Create users: admin/admin user/user
-			User user1 = new User("user", "$2a$04$hHrU55FK94bBl3L7jyVkKuINEeqSXjaBh37aPfksLpWU7yXin68ii", "USER");
-			User user2 = new User("admin", "$2a$04$fkSSBoKFIb0P4aKQh4ve9ewarDc8ZTSHnXdfFhM60Cb9huM6WY96a", "ADMIN");//passwordadmin
-			urepository.save(user1);
-			urepository.save(user2);
-			
-			
-			//urepository.save(new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER"));
-			//urepository.save(new User("admin","$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN"));
+			urepository.save(new User("user", "$2a$04$GcOgUINZcQRFPiZ03glwbee3I94yduWvgy1RhRzl8w7.vMYbN5UEC", "USER"));
+			urepository.save(new User("admin","$2a$04$AwHnSOMS/w9NkWXzoVkWreB4Bc5R9NmkyvSLQJHFT3JQvxdKIC4t.", "ADMIN"));
 											// comparing code lecturer as urepository.save(user1); and two
 			log.info("return all books");
 			for (Book book : brepository.findAll()) {

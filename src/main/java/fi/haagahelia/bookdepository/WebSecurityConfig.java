@@ -15,15 +15,15 @@ import fi.haagahelia.bookdepository.web.UserDetailServiceImpl;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	@Autowired
-	private UserDetailServiceImpl userDetailsService;
+//	@Autowired
+//	private UserDetailServiceImpl userDetailsService;
 	
 	@Override 
 	protected void configure(HttpSecurity http) throws Exception {
 		http		
-	//		.authorizeRequests().antMatchers("/css/**").permitAll() //  don't think i need these two 
-	//		.and()
-			.authorizeRequests().antMatchers("/signup", "/saveuser").permitAll()
+			.authorizeRequests().antMatchers("/css/**").permitAll() //  don't think i need these two 
+			.and()
+			.authorizeRequests().antMatchers("/signup", "/saveuser","/booklist").permitAll() // don't forget to get rid of /booklist
 			.and()
 			.authorizeRequests().anyRequest().authenticated()
 			.and()
