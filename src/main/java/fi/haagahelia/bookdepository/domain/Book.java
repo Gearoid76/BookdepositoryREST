@@ -98,8 +98,6 @@ public class Book {
 		else 
 			return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isdn=" + isdn
 					+ ", price=" + price + "]";
-	}
-	
-	
+	}	
 	
 }

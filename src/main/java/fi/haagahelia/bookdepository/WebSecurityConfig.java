@@ -23,7 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http		
 			.authorizeRequests().antMatchers("/css/**").permitAll() //  don't think i need these two 
 			.and()
-			.authorizeRequests().antMatchers("/signup", "/saveuser","/booklist").permitAll() // don't forget to get rid of /booklist
+			.authorizeRequests().antMatchers("/","/add", "/signup","/userlist").permitAll() // had booklist here to see if it worked 
 			.and()
 			.authorizeRequests().anyRequest().authenticated()
 			.and()
@@ -41,7 +41,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService()).passwordEncoder(new BCryptPasswordEncoder());
+		auth
+			//.userDetailsService(userDetailsService()).passwordEncoder(new BCryptPasswordEncoder());
+			.inMemoryAuthentication()
+				.withUser("user").password("password").roles("USER").and()
+				.withUser("admin").password("password").roles("USER","ADMIN");
 			
 		
 	}

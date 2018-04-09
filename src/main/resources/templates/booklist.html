@@ -24,6 +24,7 @@
 					<th>Year  </th>
 					<th>Price </th>
 					<th>ISDN  </th>
+					<th>Category </th>
 		    
 		    <th sec:authorize="hasRole('ADMIN')"></th>
 		</tr>  
@@ -35,11 +36,15 @@
 					<td th:text="${book.isdn}"></td>
 					<td th:text="${book.category.name}"></td>	
 						
- 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td> 
- 			<td sec:authorize="hasAuthority('ADMIN')"><a href="/add" class="btn btn-success">Add book</a></td>  	
+ 			<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td> 
+ 			  	
  			   		
     	</tr>
      </table>
-	
+ 	
+ 	<a href="/add" class="btn btn-success">Add book</a>
+ 	<!-- suptle changes to code, now working, but adding css from written code to make it look alittle cleaner
+ 	thanks Juha!  
+  -->
 </body>
 </html>

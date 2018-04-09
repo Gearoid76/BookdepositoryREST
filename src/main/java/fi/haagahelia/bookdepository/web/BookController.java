@@ -47,12 +47,12 @@ public class BookController {
     	return brepository.findOne(bookId);
     	} 
     // Add new Book
-    @PreAuthorize("hasAuthority('ADMIN')")
+   @PreAuthorize("hasAuthority('ROLE_ADMIN')") // problem got to configure put in ROLE 
     @RequestMapping(value = "/add")
-    public String addBook(Model model){
+    public String addBook(Model model){          // testing testing to see if it worked System.out.println("hello");
     	model.addAttribute("book", new Book());
     	model.addAttribute("category", crepository.findAll());
-        return "addbook";
+        return "/addbook";
     }
     
 	
@@ -71,3 +71,7 @@ public class BookController {
 	        return "redirect:../booklist";
 	    }	  
 }
+
+//  Notes 
+// had problems with the preauthorize function it wasnt working 
+// also mistyped ADMIN was should of been to be ROLE_ADMIN

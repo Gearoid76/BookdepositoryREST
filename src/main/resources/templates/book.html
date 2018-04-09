@@ -25,7 +25,7 @@
 			<td th:text="{book.isdn}"></td>  
 			
 			
-			<td th:text="{book.category.name}"></td>
+			<td th:text="{book.category.name}"></td> <!-- from book to Book  -->
 		<td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td> 
 			</tr>
 	</tbody>
@@ -33,5 +33,5 @@
   	<a href="/add" class="btnbtn-primary">Add Book</a> 
   	<a href="/add">Add Book</a> 
 	</body>  
-
+				<!-- changed the name from Book to book  -->
 </html>
